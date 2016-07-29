@@ -24,6 +24,7 @@ public class AddItemFragment extends AppCompatActivity {
 
         myDb = new ItemDbHelper(this);
 
+
         editName = (EditText) findViewById(R.id.edit_name_edit_text);
         editPrice = (EditText) findViewById(R.id.edit_price_edit_text);
         editQuantity = (EditText) findViewById(R.id.edit_quantity_edit_text);

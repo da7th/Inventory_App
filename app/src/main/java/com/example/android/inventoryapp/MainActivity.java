@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     public void showDetails(Integer i) {
 
         Intent showDetailIntent = new Intent(MainActivity.this, DetailsFragment.class);
+        showDetailIntent.putExtra("i", i);
         startActivity(showDetailIntent);
 
 
