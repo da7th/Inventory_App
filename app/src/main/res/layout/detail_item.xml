@@ -7,50 +7,56 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Product ID:" />
+
+    <TextView
+        android:id="@+id/detail_product_id_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Product Name:" />
 
-    <EditText
-        android:id="@+id/edit_name_edit_text"
+    <TextView
+        android:id="@+id/detail_product_name_text_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="40sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Product Price:" />
 
-    <EditText
-        android:id="@+id/edit_price_edit_text"
+    <TextView
+        android:id="@+id/detail_product_price_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number" />
+        android:textSize="40sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Product Quantity" />
 
-    <EditText
-        android:id="@+id/edit_quantity_edit_text"
+    <TextView
+        android:id="@+id/detail_product_quantity_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number" />
+        android:textSize="40sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Product Picture:" />
 
-    <EditText
-        android:id="@+id/edit_picture_edit_text"
+    <TextView
+        android:id="@+id/detail_product_picture_text_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/submit_item_button"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="26dp"
-        android:text="Submit" />
+        android:textSize="40sp" />
 
 </LinearLayout>

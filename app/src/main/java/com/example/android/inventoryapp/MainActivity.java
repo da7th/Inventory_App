@@ -38,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
         quantityTV = (TextView) findViewById(R.id.quantity_text_view);
 
 
-        ListView listView = (ListView) findViewById(R.id.list);
+        final ListView listView = (ListView) findViewById(R.id.list);
 
 
         items = new ArrayList<Item>();
-        ItemAdapter itemAdapter = new ItemAdapter(this, items);
+        final ItemAdapter itemAdapter = new ItemAdapter(this, items);
         listView.setAdapter(itemAdapter);
 
 
