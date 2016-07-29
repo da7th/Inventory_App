@@ -106,6 +106,18 @@ public class ItemDbHelper extends SQLiteOpenHelper {
                 itemSQLContract.TABLE_NAME, new String[]{"0"});
     }
 
+    public Cursor readData(Integer id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //a cursor object allows for random read and write, this code allows us to store all of the
+        // table data into the cursor res and return it to where the method was called to be shown
+        Cursor res = db.query(itemSQLContract.TABLE_NAME, new String[]{itemSQLContract.COL_1,
+                        itemSQLContract.COL_2, itemSQLContract.COL_3, itemSQLContract.COL_4,
+                        itemSQLContract.COL_5,}, itemSQLContract._ID + " like" + "'%" + id + "%'", null, null,
+                null, null);
+
+        return res;
+    }
+
     //the contract class by which to setup the table
     //basecolumn will setup two extra columns for _ID and _count
     public static abstract class itemSQLContract implements BaseColumns {

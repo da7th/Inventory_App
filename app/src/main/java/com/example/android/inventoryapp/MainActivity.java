@@ -38,27 +38,15 @@ public class MainActivity extends AppCompatActivity {
         quantityTV = (TextView) findViewById(R.id.quantity_text_view);
 
 
-        final ListView listView = (ListView) findViewById(R.id.list);
+        ListView listView = (ListView) findViewById(R.id.list);
 
 
         items = new ArrayList<Item>();
-        final ItemAdapter itemAdapter = new ItemAdapter(this, items);
+        ItemAdapter itemAdapter = new ItemAdapter(this, items);
         listView.setAdapter(itemAdapter);
 
-        listView.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                        Item currentItem = itemAdapter.getItem(i);
-                        showDetails(i);
-
-                        //send the current item to its details screen
-
-                    }
-                }
-        );
-
+        viewDetails(listView, itemAdapter);
         viewAllData();
         addData();
 
@@ -78,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     public void viewAllData() {
 
         Cursor res = myDb.readAllData();
@@ -94,6 +81,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void viewDetails(ListView listView, final ItemAdapter itemAdapter) {
+
+        listView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                        Item currentItem = itemAdapter.getItem(i);
+                        showDetails(i);
+
+                        //send the current item to its details screen
+
+                    }
+                }
+        );
+    }
     public void showDetails(Integer i) {
 
         Intent showDetailIntent = new Intent(MainActivity.this, DetailsFragment.class);
