@@ -16,20 +16,6 @@ public class ItemDbHelper extends SQLiteOpenHelper {
     //tag used to find errors in this particular file
     private String DB_LOG_TAG = "DATABASE_HELPER";
 
-    //the contract class by which to setup the table
-    //basecolumn will setup two extra columns for _ID and _count
-    public static abstract class itemSQLContract implements BaseColumns {
-
-        //table name and column names
-        public static final String TABLE_NAME = "inventory";
-        public static final String COL_1 = "item";
-        public static final String COL_2 = "price";
-        public static final String COL_3 = "quantity";
-        public static final String COL_4 = "sold";
-        public static final String COL_5 = "image";
-
-    }
-
     public ItemDbHelper (Context context) {
         super(context, itemSQLContract.TABLE_NAME, null, 1);
     }
@@ -75,21 +61,18 @@ public class ItemDbHelper extends SQLiteOpenHelper {
         //table, in order to check that the insert funcation was successful it must not return -1
         //by placing the result in a long variable we can check for the -1 using an if statement
         long result = db.insert(itemSQLContract.TABLE_NAME,null,contentValues);
-        if (result == -1){
-            return false;
-        }else{
-            return true;
-        }
+        return result != -1;
     }
 
     public Cursor readAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
         //a cursor object allows for random read and write, this code allows us to store all of the
         // table data into the cursor res and return it to where the method was called to be shown
-        Cursor res = db.rawQuery("select * from " + itemSQLContract.TABLE_NAME, null);
+        Cursor res = db.query(itemSQLContract.TABLE_NAME, new String[]{itemSQLContract._ID,
+                itemSQLContract.COL_1, itemSQLContract.COL_2, itemSQLContract.COL_3,
+                itemSQLContract.COL_4, itemSQLContract.COL_5}, null, null, null, null, null);
         return res;
     }
-
 
     public Boolean updateData(String id, String item, Integer price, Integer quantity, String image){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -108,7 +91,6 @@ public class ItemDbHelper extends SQLiteOpenHelper {
         return true;
     }
 
-
     public Integer deleteData(String id){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -122,6 +104,20 @@ public class ItemDbHelper extends SQLiteOpenHelper {
         //the following will delete all the data in the table
         return db.delete(itemSQLContract.TABLE_NAME, "select * from " +
                 itemSQLContract.TABLE_NAME, new String[]{"0"});
+    }
+
+    //the contract class by which to setup the table
+    //basecolumn will setup two extra columns for _ID and _count
+    public static abstract class itemSQLContract implements BaseColumns {
+
+        //table name and column names
+        public static final String TABLE_NAME = "inventory";
+        public static final String COL_1 = "item";
+        public static final String COL_2 = "price";
+        public static final String COL_3 = "quantity";
+        public static final String COL_4 = "sold";
+        public static final String COL_5 = "image";
+
     }
 
 

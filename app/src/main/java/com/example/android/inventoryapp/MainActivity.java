@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                         Item currentItem = itemAdapter.getItem(i);
+                        showDetails(i);
 
                         //send the current item to its details screen
 
@@ -87,11 +88,16 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-
         while (res.moveToNext()) {
             items.add(new Item(res.getString(1), Integer.parseInt(res.getString(2)),
                     Integer.parseInt(res.getString(3)), res.getString(4)));
         }
+    }
+
+    public void showDetails(Integer i) {
+
+        Intent showDetailIntent = new Intent(MainActivity.this, DetailsFragment.class);
+        startActivity(showDetailIntent);
 
 
     }
