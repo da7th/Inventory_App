@@ -59,4 +59,22 @@
         android:layout_height="wrap_content"
         android:textSize="40sp" />
 
+    <Button
+        android:id="@+id/sell_details_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sell 1" />
+
+    <Button
+        android:id="@+id/restock_details_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restock" />
+
+    <Button
+        android:id="@+id/delete_details_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Product" />
+
 </LinearLayout>
