@@ -1,6 +1,7 @@
 package com.example.android.inventoryapp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editName, editPrice, editQuantity, editPicture;
     Button addItemB, submitB;
     ItemDbHelper myDb;
+    ArrayList<Item> items;
     private String LOG_TAG = "MainActivity";
 
     @Override
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView = (ListView) findViewById(R.id.list);
 
 
-        ArrayList<Item> items = new ArrayList<Item>();
+        items = new ArrayList<Item>();
         final ItemAdapter itemAdapter = new ItemAdapter(this, items);
         listView.setAdapter(itemAdapter);
 
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-
+        viewAllData();
         addData();
 
     }
@@ -74,5 +77,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    public void viewAllData() {
+
+        Cursor res = myDb.readAllData();
+        if (res.getCount() == 0) {
+
+            Toast.makeText(this, "nothing to show", Toast.LENGTH_SHORT);
+            return;
+        }
+
+
+        while (res.moveToNext()) {
+            items.add(new Item(res.getString(0), Integer.parseInt(res.getString(1)),
+                    Integer.parseInt(res.getString(2)), res.getString(3)));
+        }
+
+
+    }
 
 }
