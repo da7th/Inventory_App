@@ -2,6 +2,7 @@ package com.example.android.inventoryapp;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -74,11 +75,13 @@ public class DetailsFragment extends AppCompatActivity {
             quantityTVData = Integer.parseInt(res.getString(3));
             pictureTVData = res.getString(4);
 
+            restock(nameTVData);
             sell(idTVData, nameTVData, priceTVData, quantityTVData, pictureTVData);
 
         } else {
             Toast.makeText(this, "nothing in the given resource", Toast.LENGTH_SHORT);
         }
+
 
     }
 
@@ -100,11 +103,43 @@ public class DetailsFragment extends AppCompatActivity {
 
     }
 
-    public void restock() {
+    public void restock(final String productName) {
+        restockB.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.e("restock method", "restocking");
+
+                        Intent mailIntent = new Intent(Intent.ACTION_SENDTO);
+                        mailIntent.setData(Uri.parse("mailto:"));
+                        mailIntent.putExtra(Intent.EXTRA_EMAIL, "Supplier@gmail.com");
+                        mailIntent.putExtra(Intent.EXTRA_SUBJECT, ("Restock order for the product: " + productName));
+                        mailIntent.putExtra(Intent.EXTRA_TEXT, "Restock order for the product: " + productName +
+                                "the quantity required is: ###");
+                        if (mailIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(mailIntent);
+                        }
+
+                    }
+                }
+        );
+
+
 
     }
 
-    public void deleteProduct() {
+    public void deleteProduct(final String idTVData) {
+        deleteB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDb.deleteData(idTVData);
+
+
+                Intent returnToMainIntent = new Intent(DetailsFragment.this, MainActivity.class);
+                startActivity(returnToMainIntent);
+            }
+        });
+
 
     }
 
