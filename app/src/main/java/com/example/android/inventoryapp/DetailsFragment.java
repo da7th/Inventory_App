@@ -22,8 +22,8 @@ public class DetailsFragment extends AppCompatActivity {
 
     Integer i;
     ItemDbHelper myDb;
-    TextView idTV, nameTV, priceTV, quantityTV, pictureTV;
-    Button sellB, restockB, deleteB;
+    TextView idTV, nameTV, priceTV, quantityTV, pictureTV, soldTV;
+    Button sellB, restockB, deleteB, stockB;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,10 +35,12 @@ public class DetailsFragment extends AppCompatActivity {
         priceTV = (TextView) findViewById(R.id.detail_product_price_text_view);
         quantityTV = (TextView) findViewById(R.id.detail_product_quantity_text_view);
         pictureTV = (TextView) findViewById(R.id.detail_product_picture_text_view);
+        soldTV = (TextView) findViewById(R.id.detail_sold_text_view);
 
         sellB = (Button) findViewById(R.id.sell_details_button);
         restockB = (Button) findViewById(R.id.restock_details_button);
         deleteB = (Button) findViewById(R.id.delete_details_button);
+        stockB = (Button) findViewById(R.id.stock_details_button);
 
         myDb = new ItemDbHelper(this);
 
@@ -60,6 +62,7 @@ public class DetailsFragment extends AppCompatActivity {
         Integer priceTVData;
         Integer quantityTVData;
         String pictureTVData;
+        Integer soldTVData;
 
         if (res.getCount() > 0) {
 
@@ -68,16 +71,19 @@ public class DetailsFragment extends AppCompatActivity {
             priceTV.setText(res.getString(2));
             quantityTV.setText(res.getString(3));
             pictureTV.setText(res.getString(4));
+            soldTV.setText(res.getString(5));
 
             idTVData = res.getString(0);
             nameTVData = res.getString(1);
             priceTVData = Integer.parseInt(res.getString(2));
             quantityTVData = Integer.parseInt(res.getString(3));
             pictureTVData = res.getString(4);
+            soldTVData = Integer.parseInt(res.getString(5));
 
             restock(nameTVData);
-            sell(idTVData, nameTVData, priceTVData, quantityTVData, pictureTVData);
+            sell(idTVData, nameTVData, priceTVData, quantityTVData, pictureTVData, soldTVData);
             deleteProduct(idTVData);
+            stock(idTVData, nameTVData, priceTVData, quantityTVData, pictureTVData, soldTVData);
 
         } else {
             Toast.makeText(this, "nothing in the given resource", Toast.LENGTH_SHORT);
@@ -85,15 +91,16 @@ public class DetailsFragment extends AppCompatActivity {
 
     }
 
-    public void sell(final String idTVData, final String nameTVData, final Integer priceTVData, final Integer quantityTVData, final String pictureTVData) {
+    public void sell(final String idTVData, final String nameTVData, final Integer priceTVData, final Integer quantityTVData, final String pictureTVData, final Integer soldTVData) {
         sellB.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
                         Integer quantityDecrement = quantityTVData - 1;
+                        Integer soldIncrement = soldTVData + 1;
 
-                        myDb.updateData(idTVData, nameTVData, priceTVData, quantityDecrement, pictureTVData);
+                        myDb.updateData(idTVData, nameTVData, priceTVData, quantityDecrement, pictureTVData, soldIncrement);
 
                         Intent returnToMainIntent = new Intent(DetailsFragment.this, MainActivity.class);
                         startActivity(returnToMainIntent);
@@ -124,8 +131,6 @@ public class DetailsFragment extends AppCompatActivity {
                 }
         );
 
-
-
     }
 
     public void deleteProduct(final String idTVData) {
@@ -140,6 +145,24 @@ public class DetailsFragment extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    public void stock(final String idTVData, final String nameTVData, final Integer priceTVData, final Integer quantityTVData, final String pictureTVData, final Integer soldTVData) {
+        stockB.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Integer quantityDecrement = quantityTVData + 100;
+
+                        myDb.updateData(idTVData, nameTVData, priceTVData, quantityDecrement, pictureTVData, soldTVData);
+
+                        Intent returnToMainIntent = new Intent(DetailsFragment.this, MainActivity.class);
+                        startActivity(returnToMainIntent);
+                    }
+                }
+        );
 
     }
 

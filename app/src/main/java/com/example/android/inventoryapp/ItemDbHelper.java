@@ -27,7 +27,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
 
         itemDb.execSQL("create table " + itemSQLContract.TABLE_NAME + " (_ID INTEGER PRIMARY KEY "
                 + "AUTOINCREMENT, ITEM TEXT, PRICE INTEGER, QUANTITY INTEGER, " +
-                "IMAGE TEXT)");
+                "IMAGE TEXT, SOLD INTEGER)");
         Log.v(DB_LOG_TAG,"the onCreate method has been called the table has been created");
 
 
@@ -45,7 +45,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
                 "and recreated");
     }
 
-    public boolean insertData(String item, Integer price, Integer quantity, String image){
+    public boolean insertData(String item, Integer price, Integer quantity, String image, Integer sold) {
 
         //create a writable instance of the database
         SQLiteDatabase db = this.getWritableDatabase();
@@ -57,6 +57,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
         contentValues.put(itemSQLContract.COL_2,price);
         contentValues.put(itemSQLContract.COL_3, quantity);
         contentValues.put(itemSQLContract.COL_4, image);
+        contentValues.put(itemSQLContract.COL_5, sold);
 
         //the insert function takes the table name and the content values set and sets it to the
         //table, in order to check that the insert funcation was successful it must not return -1
@@ -71,20 +72,22 @@ public class ItemDbHelper extends SQLiteOpenHelper {
         // table data into the cursor res and return it to where the method was called to be shown
         Cursor res = db.query(itemSQLContract.TABLE_NAME, new String[]{itemSQLContract._ID,
                 itemSQLContract.COL_1, itemSQLContract.COL_2, itemSQLContract.COL_3,
-                itemSQLContract.COL_4}, null, null, null, null, null);
+                itemSQLContract.COL_4, itemSQLContract.COL_5}, null, null, null, null, null);
         return res;
     }
 
-    public Boolean updateData(String id, String item, Integer price, Integer quantity, String image){
+    public Boolean updateData(String id, String item, Integer price, Integer quantity, String image, Integer sold) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(itemSQLContract._ID,id);
-        contentValues.put(itemSQLContract.COL_1,item);
-        contentValues.put(itemSQLContract.COL_2,price);
+        contentValues.put(itemSQLContract._ID, id);
+        contentValues.put(itemSQLContract.COL_1, item);
+        contentValues.put(itemSQLContract.COL_2, price);
         contentValues.put(itemSQLContract.COL_3, quantity);
         contentValues.put(itemSQLContract.COL_4, image);
+        contentValues.put(itemSQLContract.COL_5, sold);
+
 
         //the following method call will replace the row based on the unique identifier which in
         // this case is the id
@@ -112,7 +115,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
         //a cursor object allows for random read and write, this code allows us to store all of the
         // table data into the cursor res and return it to where the method was called to be shown
         Cursor res = db.query(itemSQLContract.TABLE_NAME, new String[]{itemSQLContract._ID, itemSQLContract.COL_1,
-                itemSQLContract.COL_2, itemSQLContract.COL_3, itemSQLContract.COL_4}, itemSQLContract._ID +
+                itemSQLContract.COL_2, itemSQLContract.COL_3, itemSQLContract.COL_4, itemSQLContract.COL_5}, itemSQLContract._ID +
                 " like" + "'%" + id + "%'", null, null, null, null);
 
         return res;
@@ -128,6 +131,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
         public static final String COL_2 = "price";
         public static final String COL_3 = "quantity";
         public static final String COL_4 = "image";
+        public static final String COL_5 = "sold";
 
     }
 

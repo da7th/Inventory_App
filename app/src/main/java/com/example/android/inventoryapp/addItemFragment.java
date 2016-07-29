@@ -46,7 +46,7 @@ public class AddItemFragment extends AppCompatActivity {
                         // string, the return value of insertData is boolean so it will tell us whether the
                         // data was inserted or not
                         boolean isInserted = myDb.insertData(editName.getText().toString(), Integer.parseInt(editPrice.getText().toString()),
-                                Integer.parseInt(editQuantity.getText().toString()), editPicture.getText().toString());
+                                Integer.parseInt(editQuantity.getText().toString()), editPicture.getText().toString(), 0);
                         if (isInserted == true) {
                             Toast.makeText(AddItemFragment.this, "Data inserted", Toast.LENGTH_SHORT).show();
                         } else {
