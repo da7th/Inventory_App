@@ -77,11 +77,11 @@ public class DetailsFragment extends AppCompatActivity {
 
             restock(nameTVData);
             sell(idTVData, nameTVData, priceTVData, quantityTVData, pictureTVData);
+            deleteProduct(idTVData);
 
         } else {
             Toast.makeText(this, "nothing in the given resource", Toast.LENGTH_SHORT);
         }
-
 
     }
 

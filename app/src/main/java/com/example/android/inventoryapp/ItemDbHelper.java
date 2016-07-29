@@ -96,7 +96,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         //the following deleted a row of data according to the given id
-        return db.delete(itemSQLContract.TABLE_NAME,"ID = ?",new String[]{id});
+        return db.delete(itemSQLContract.TABLE_NAME, "_ID = ?", new String[]{id});
     }
 
     public Integer deleteAllData(SQLiteDatabase db){
