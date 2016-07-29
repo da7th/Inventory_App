@@ -30,10 +30,10 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         nameTV.setText(currentItem.getName());
 
         TextView priceTV = (TextView) listView.findViewById(R.id.price_text_view);
-        priceTV.setText(currentItem.getPrice());
+        priceTV.setText((currentItem.getPrice()).toString());
 
         TextView quantityTV = (TextView) listView.findViewById(R.id.quantity_text_view);
-        quantityTV.setText(currentItem.getQuantity());
+        quantityTV.setText((currentItem.getQuantity()).toString());
 
         TextView pictureTV = (TextView) listView.findViewById(R.id.picture_text_view);
         pictureTV.setText(currentItem.getPicture());

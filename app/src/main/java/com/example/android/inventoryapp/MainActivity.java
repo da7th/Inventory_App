@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         while (res.moveToNext()) {
-            items.add(new Item(res.getString(0), Integer.parseInt(res.getString(1)),
-                    Integer.parseInt(res.getString(2)), res.getString(3)));
+            items.add(new Item(res.getString(1), Integer.parseInt(res.getString(2)),
+                    Integer.parseInt(res.getString(3)), res.getString(4)));
         }
 
 
