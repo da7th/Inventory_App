@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -87,9 +88,10 @@ public class MainActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                        Item currentItem = itemAdapter.getItem(i);
-                        showDetails(i);
+                        Integer position = i;
+                        Log.e("the value of i:", position.toString());
+                        Item currentItem = itemAdapter.getItem(position);
+                        showDetails(position);
 
                         //send the current item to its details screen
 
@@ -99,8 +101,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void showDetails(Integer i) {
 
+        ArrayList<Integer> integerList = new ArrayList<Integer>();
+        integerList.add(new Integer(i));
         Intent showDetailIntent = new Intent(MainActivity.this, DetailsFragment.class);
-        showDetailIntent.putExtra("i", i);
+        showDetailIntent.putExtra("integerList", integerList);
         startActivity(showDetailIntent);
 
 

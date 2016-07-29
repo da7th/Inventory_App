@@ -5,8 +5,11 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * Created by da7th on 7/29/2016.
@@ -32,17 +35,29 @@ public class DetailsFragment extends AppCompatActivity {
 
         myDb = new ItemDbHelper(this);
 
-        Intent thisIntent = getIntent();
-        thisIntent.getIntExtra("i", 0);
+        Log.e("the value of i: ", "this stage");
 
-        Cursor res = myDb.readData(i);
+        Intent thisIntent = getIntent();
+        ArrayList<Integer> integers = thisIntent.getIntegerArrayListExtra("integerList");
+        Integer i = integers.get(0);
+
+
+        Log.e("the value of i: ", i.toString());
+        Cursor res = myDb.readAllData();
+
+        res.moveToPosition(i);
+
+        int count = res.getCount();
+        Log.e("the value of getCount: ", "= " + count);
 
         if (res.getCount() > 0) {
-            idTV.setText(res.getString(1));
-            nameTV.setText(res.getString(2));
-            priceTV.setText(Integer.parseInt(res.getString(3)));
-            quantityTV.setText(Integer.parseInt(res.getString(4)));
-            pictureTV.setText(res.getString(5));
+
+            idTV.setText(res.getString(0));
+            nameTV.setText(res.getString(1));
+            priceTV.setText(res.getString(2));
+            quantityTV.setText(res.getString(3));
+            pictureTV.setText(res.getString(4));
+
         } else {
             Toast.makeText(this, "nothing in the given resource", Toast.LENGTH_SHORT);
         }

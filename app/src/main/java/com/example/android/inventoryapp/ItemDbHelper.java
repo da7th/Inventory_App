@@ -108,7 +108,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
     }
 
     public Cursor readData(Integer id) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         //a cursor object allows for random read and write, this code allows us to store all of the
         // table data into the cursor res and return it to where the method was called to be shown
         Cursor res = db.query(itemSQLContract.TABLE_NAME, new String[]{itemSQLContract._ID, itemSQLContract.COL_1,
