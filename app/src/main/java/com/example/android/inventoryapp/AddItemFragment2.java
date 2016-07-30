@@ -48,12 +48,12 @@ public class AddItemFragment2 extends AppCompatActivity {
                         boolean isInserted = myDb.insertData(editName.getText().toString(), Integer.parseInt(editPrice.getText().toString()),
                                 Integer.parseInt(editQuantity.getText().toString()), editPicture.getText().toString(), 0);
                         if (isInserted == true) {
-                            Toast.makeText(AddItemFragment.this, "Data inserted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddItemFragment2.this, "Data inserted", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(AddItemFragment.this, "Data not inserted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddItemFragment2.this, "Data not inserted", Toast.LENGTH_SHORT).show();
                         }
 
-                        Intent returnToMainIntent = new Intent(AddItemFragment.this, MainActivity.class);
+                        Intent returnToMainIntent = new Intent(AddItemFragment2.this, MainActivity.class);
                         startActivity(returnToMainIntent);
 
                     }
