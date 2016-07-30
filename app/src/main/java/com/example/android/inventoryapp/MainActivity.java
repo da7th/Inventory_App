@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent addItemIntent = new Intent(MainActivity.this, AddItemFragment.class);
+                Intent addItemIntent = new Intent(MainActivity.this, AddItemFragment2.class);
                 startActivity(addItemIntent);
 
             }

@@ -11,7 +11,7 @@ import android.widget.Toast;
 /**
  * Created by da7th on 7/29/2016.
  */
-public class AddItemFragment extends AppCompatActivity {
+public class AddItemFragment2 extends AppCompatActivity {
 
     Button submitB;
     EditText editName, editPrice, editQuantity, editPicture;
@@ -36,7 +36,7 @@ public class AddItemFragment extends AppCompatActivity {
 
     }
 
-    public void submitAdd(){
+    public void submitAdd() {
         submitB.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -53,7 +53,7 @@ public class AddItemFragment extends AppCompatActivity {
                             Toast.makeText(AddItemFragment.this, "Data not inserted", Toast.LENGTH_SHORT).show();
                         }
 
-                        Intent returnToMainIntent = new Intent(AddItemFragment.this,MainActivity.class);
+                        Intent returnToMainIntent = new Intent(AddItemFragment.this, MainActivity.class);
                         startActivity(returnToMainIntent);
 
                     }
